@@ -215,6 +215,8 @@ avgsteps_interval &lt;- with(myData, aggregate(steps ~ time, myData, mean))
 median_steps &lt;- round(median(steps_day$steps))
 </code></pre>
 
+<p>The mean of the steps is 10,766 and the median is 10,765</p>
+
 <h2>What is the average daily activity pattern?</h2>
 
 <p>The following code produces a time series plot by interval of the average number of steps taken across all days.</p>
@@ -229,6 +231,8 @@ median_steps &lt;- round(median(steps_day$steps))
 <pre><code class="r">interval_max_avgsteps &lt;- format(avgsteps_interval[avgsteps_interval$steps == 
     max(avgsteps_interval$steps), ]$time, &quot;%H:%M&quot;)
 </code></pre>
+
+<p>The 5 minute interval containing the max no of avg steps across all days is 08:35</p>
 
 <h2>Imputing missing values</h2>
 
@@ -252,11 +256,15 @@ final_steps_day &lt;- with(final_data, aggregate(steps ~ date, final_data, sum))
 
 <p><img src="data:image/png;base64,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" alt="plot of chunk final_steps_per_day"/> </p>
 
+<p>There seems to be a slight difference in the graph, as we have imputed the ones with missing data with the mean.</p>
+
 <p>Mean of the steps and median of the steps are recalclated for this new data frame (<code>final_mean_steps</code> and <code>final_median_steps</code> respectively)</p>
 
 <pre><code class="r">final_mean_steps &lt;- mean(final_steps_day$steps)
 final_median_steps &lt;- median(final_steps_day$steps)
 </code></pre>
+
+<p>After imputing the missing data with mean, the new mean is 10,766 and 10,766. We observe that the mean remains the same while the median value has changed.</p>
 
 <h2>Are there differences in activity patterns between weekdays and weekends?</h2>
 
@@ -270,7 +278,7 @@ avg_steps &lt;- with(final_data, aggregate(steps ~ interval + day_of_week, final
     mean))
 </code></pre>
 
-<p>This plots the two different occurences, and we notice the mean is maintained more on a weekend than on a weekday. Also, there is a greater peak in the weekday and it&#39;s evenly spread across daytime.</p>
+<p>This plots the two different occurences, and we notice the occurence around the mean is maintained more on a weekend than on a weekday. Also, there is a greater peak in the weekday and it&#39;s evenly spread across daytime.</p>
 
 <pre><code class="r">with(avg_steps, xyplot(steps ~ interval | day_of_week, layout = c(1, 2), type = &quot;l&quot;, 
     ylab = &quot;Number of steps&quot;))

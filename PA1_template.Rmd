@@ -36,6 +36,8 @@ mean_steps <- round(mean(steps_day$steps))
 median_steps <- round(median(steps_day$steps))
 ```
 
+The mean of the steps is `r format(mean_steps, big.mark=",")` and the median is `r format(median_steps, big.mark=",")`
+
 ## What is the average daily activity pattern?
 
 The following code produces a time series plot by interval of the average number of steps taken across all days.
@@ -50,6 +52,8 @@ The 5 minute interval which contains the max no of average steps across all days
 ```{r}
 interval_max_avgsteps <- format(avgsteps_interval[avgsteps_interval$steps == max(avgsteps_interval$steps), ]$time, "%H:%M")
 ```
+
+The 5 minute interval containing the max no of avg steps across all days is `r interval_max_avgsteps`
 
 ## Imputing missing values
 
@@ -74,12 +78,16 @@ New histogram is drawn for the new data frame with missing values replaced with 
 with(final_steps_day, hist(steps, breaks = 30, xlab = "Number of steps", main = "Histogram of steps taken per day"))
 ```
 
+There seems to be a slight difference in the graph, as we have imputed the ones with missing data with the mean.
+
 Mean of the steps and median of the steps are recalclated for this new data frame (`final_mean_steps` and `final_median_steps` respectively)
 
 ```{r}
 final_mean_steps <- mean(final_steps_day$steps)
 final_median_steps <- median(final_steps_day$steps)
 ```
+
+After imputing the missing data with mean, the new mean is `r format(final_mean_steps, big.mark=",")` and `r format(final_median_steps, big.mark=",")`. We observe that the mean remains the same while the median value has changed.
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
@@ -93,7 +101,7 @@ final_data$day_of_week[!weekends] <- "weekday"
 avg_steps <- with(final_data, aggregate(steps ~ interval + day_of_week, final_data, mean))
 ```
 
-This plots the two different occurences, and we notice the mean is maintained more on a weekend than on a weekday. Also, there is a greater peak in the weekday and it's evenly spread across daytime.
+This plots the two different occurences, and we notice the occurence around the mean is maintained more on a weekend than on a weekday. Also, there is a greater peak in the weekday and it's evenly spread across daytime.
 
 ```{r average_activity_weekend_vs_weekday}
 with(avg_steps, xyplot(steps ~ interval | day_of_week, layout = c(1, 2), type = "l", ylab = "Number of steps"))
